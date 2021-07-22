@@ -1,4 +1,6 @@
+var limitWarningEl = document.querySelector("#limit-warning");
 var issueContainerEl = document.querySelector("#issues-container");
+
 var getRepoIssues = function(repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
     
@@ -8,6 +10,11 @@ var getRepoIssues = function(repo) {
             response.json().then(function(data) {
                 //pass response data to dom function
                 displayIssues(data);
+                
+                //check if api has paginated issues
+                if (response.headers.get("Link")){
+                    displayWarning(repo);
+                }
             });
         }
         else {
@@ -16,7 +23,7 @@ var getRepoIssues = function(repo) {
     });
 }
 
-getRepoIssues("georgedmendoza/run-buddy");
+getRepoIssues("facebook/react");
 
 var displayIssues = function(issues){
     //check for no issues to display message
@@ -56,3 +63,14 @@ var displayIssues = function(issues){
         issueContainerEl.appendChild(issueEl);
     };
 };
+
+var displayWarning = function(repo) {
+    //add text to warning container
+    limitWarningEl.textContent = "To see more than 30 issues, visit ";
+    var linkEl = document.createElement("a");
+    linkEl.textContent = "See more Issues on GitHub.com";
+    linkEl.setAttribute("href", "https://github.com/" + repo + "/issues");
+  
+    //append to warning container
+    limitWarningEl.appendChild(linkEl);
+  }
