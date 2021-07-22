@@ -23,7 +23,7 @@ var getUserRepos = function(user) {
     })
     .catch(function(error) {
       //notive thei `.catch` getting chained onto the end of the `.then()` method
-      alert("Unable to cennect to GitHub");
+      alert("Unable to cennect to GitHub");code 
     })
   };
 
