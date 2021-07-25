@@ -2,7 +2,6 @@ var repoNameEl = document.querySelector("#repo-name");
 var limitWarningEl = document.querySelector("#limit-warning");
 var issueContainerEl = document.querySelector("#issues-container");
 
-
 var getRepoName = function () {
     //grab repo name from url query string
     var queryString = document.location.search;
@@ -40,8 +39,7 @@ var getRepoIssues = function(repo) {
             document.location.replace("./index.html");
         }
     });
-}
-
+};
 
 var displayIssues = function(issues){
     //check for no issues to display message
@@ -92,5 +90,6 @@ var displayWarning = function(repo) {
     //append to warning container
     limitWarningEl.appendChild(linkEl);
   }
-  
+
+ 
 getRepoName();
